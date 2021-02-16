@@ -407,6 +407,12 @@ public class StompClientLib: NSObject, SRWebSocketDelegate {
         sendFrame(command: StompCommands.commandUnsubscribe, header: headerToSend, body: nil)
     }
     
+    public func unsubscribeWithHeader(destination: String, withHeader header: [String: String]) {
+    var headerToSend = header
+    headerToSend[StompCommands.commandHeaderDestination] = destination
+    sendFrame(command: StompCommands.commandUnsubscribe, header: headerToSend, body: nil)
+    }
+    
     public func begin(transactionId: String) {
         var headerToSend = [String: String]()
         headerToSend[StompCommands.commandHeaderTransaction] = transactionId
